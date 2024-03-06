@@ -65,5 +65,21 @@ An agent observes the environment, then performs action that will either yield r
 - Online learning algorithms generally works on huge datasets, which cannot fit in one machine's main memory (out-of-core). Hence, algorithm loads part of the data, trains on that data, then repeats the process until it has learnt all the data, incrementally.
 
 ### Out-of-core learning
-- This is usually done offline (i.e. not on the live system), so online learning can be a confusing name. We can see it as incremental learning.
+- This is usually done offline (i.e. not on the live system). This can be seen as incremental learning.
 
+## Instance-Based Learning Vs Model-Based Learning
+This is a categorization based on how the predictions are made.
+
+### Instance-based learning
+- Trivial form of learning. For example, spam filter will mark all the new emails (inference) that are exactly same as the ones (training data) user has already marked as spam.
+- Such a prediction algorithm will miss spam emails that are similar but not exactly same as training data.
+- Not so bad, but not the best!
+- Algorithm uses similarity measure, by comparing with the learned data
+
+### Mode-based learning
+- Builds model and uses it make predictions
+- Linear model, quadratic model... trying to fit to training data as much as possible (not to overfit) and uses that fit to make new predictions
+
+## Main Challenges of ML
+- Insufficient quantity of training data
+- Non-representative training data (missing variations)
