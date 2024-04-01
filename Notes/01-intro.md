@@ -1,10 +1,11 @@
 # (ML)^2
 
-I am learning Data Science, Machine Learning, Deep Learning from following books,
+I am learning Data Science, Machine Learning, Deep Learning from following books and sources,
 - "Data Science from Scratch (Ed.2) by Joel Grus"
 - "Hands-on Machine Learning with Scikit-Learn, Keras, and Tensor Flow (Ed.3) by Aurélien Geron"
+- Machine Learning Specialization by Andrew Ng (I am a big fan), DeepLearning.ai
 
-_**Notes and excerpts from these books**_
+_**Below notes and excerpts are from these books/course(s)**_
 
 # Machine Learning
 ML is the field of study that gives computers the ability to learn without being explicitly programmed. - **Arthur Samuel, 1959**
