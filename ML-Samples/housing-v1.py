@@ -12,7 +12,7 @@ housing.hist(bins=50, figsize=(12, 8))
 plt.show()
 
 # randomly one can get test data, but will not be unique each time...
-# anothe option can be to use hashcode of each row's unique identifier if available (like longitude and latitude)...
+# another option can be to use hashcode of each row's unique identifier if available (like longitude and latitude)...
 # better option is just use from sklearn.model_selection, train_test_split
 import numpy as np
 
@@ -135,11 +135,11 @@ from sklearn.preprocessing import StandardScaler
 std_scaler = StandardScaler()
 housing_num_std_scaled = std_scaler.fit_transform(housing_num)
 
-# feature scaling has more to learn like handling heavy tail then replacing them with its logarithm is better
+# feature scaling has more to learn like handling heavy tail then replacing them with its logarithm
 # let us do that later...
 
 # sometimes even the target values need to be transformed (scaled) like using one's logarithm values
-# then predicted values too would be logarithm values... inverse_tranform() would be useful to determine the actual/intended values
+# then predicted values too would be logarithm values... inverse_tranform() would be useful to determine the actual/intended predicted value
 # option 1
 from sklearn.linear_model import LinearRegression
 
@@ -161,3 +161,85 @@ model.fit(housing[["median_income"]], housing_labels)
 predictions = model.predict(some_new_data)
 print("TransformedTargetRegressor", predictions)
 
+# pipeline
+# sample
+# from sklearn.pipeline import Pipeline
+# num_pipeline = Pipeline([
+#     ("impute", SimpleImputer(strategy="median")),
+#     ("standardize", StandardScaler)])
+
+# Transformation Pipelines
+
+# from sklearn.pipeline import Pipeline
+
+# num_pipeline = Pipeline([
+#     ("impute", SimpleImputer(strategy="median")),
+#     ("standardize", StandardScaler())
+# ])
+
+from sklearn.pipeline import make_pipeline
+num_pipeline = make_pipeline(SimpleImputer(strategy="median"), StandardScaler())
+
+housing_num_prepared = num_pipeline.fit_transform(housing_num)
+
+# get a dataframe from the pipeline
+df_housing_num_prepared = pd.DataFrame(
+                                    housing_num_prepared,
+                                    columns=num_pipeline.get_feature_names_out(),
+                                    index=housing_num.index)
+print(df_housing_num_prepared.head(2))
+
+# column level transformer to apply for both numeric and category columns
+from sklearn.compose import ColumnTransformer
+num_attribs = ["longitude", "latitude", "housing_median_age", "total_rooms",
+               "total_bedrooms", "population", "households", "median_income"]
+cat_attribs = ["ocean_proximity"]
+
+cat_pipeline = make_pipeline(
+    SimpleImputer(strategy="most_frequent"),
+    OneHotEncoder(handle_unknown="ignore"))
+
+preprocessing = ColumnTransformer([
+    ("num", num_pipeline, num_attribs),
+    ("cat", cat_pipeline, cat_attribs),
+])
+
+# it is not convenient to mention all the column titles like that... make_column_transformer can automatically pick the columns
+from sklearn.compose import make_column_selector, make_column_transformer
+preprocessing = make_column_transformer(
+    (num_pipeline, make_column_selector(dtype_include=np.number)),
+    (cat_pipeline, make_column_selector(dtype_include=object)),
+)
+
+housing_prepared = preprocessing.fit_transform(housing)
+
+# need to see if following is needed or not
+# start - pipeline
+from sklearn.preprocessing import FunctionTransformer
+
+def column_ratio(X):
+    return X[:, [0]] / X[:, [1]]
+
+def ratio_name(function_transformer, feature_names_in):
+    return ["ratio"]
+
+def ratio_pipeline():
+    return make_pipeline(
+        SimpleImputer(strategy="median"),
+        FunctionTransformer(column_ratio, feature_names_out=ratio_name),
+        StandardScaler())
+
+log_pipeline = make_pipeline(
+    SimpleImputer(strategy="median"),
+    FunctionTransformer(np.log, feature_names_out="one-to-one"),
+    StandardScaler())
+
+from sklearn.cluster import KMeans
+
+class ClusterSimilarity(BaseEstimator, TransformerMixin):
+    def __init__(self, n_clusters=10, gamma=1.0, random_state=None):
+        self.n_clusters = n_clusters
+        self.gamma = gamma
+        self.random_state = random_state
+
+cluster_simil = ClusterSimilarity()

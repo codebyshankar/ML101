@@ -1,13 +1,19 @@
 # (ML)^2
+_**Me Learning Machine Learning**_
 
-I am learning Data Science, Machine Learning, Deep Learning from following books and sources,
+I have been learning Data Science, Machine Learning, Deep Learning from many sources, especially from sources,
 - "Data Science from Scratch (Ed.2) by Joel Grus"
 - "Hands-on Machine Learning with Scikit-Learn, Keras, and Tensor Flow (Ed.3) by Aurélien Geron"
 - Machine Learning Specialization by Andrew Ng (I am a big fan), DeepLearning.ai
+- Kaggle Competitions
 
-_**Below notes and excerpts are from these books/course(s)**_
+_**Below notes and excerpts are either from the above mentioned sources or influenced by them**_
 
-# Machine Learning
+_**I will mention if something is based on my own thoughts (is it even possible?)**_
+
+# Introduction to Machine Learning
+
+## Machine Learning
 ML is the field of study that gives computers the ability to learn without being explicitly programmed. - **Arthur Samuel, 1959**
 
 A computer program is said to learn from experience E with respect to some task T and some performance measure P, if its performance on T, as measured by P, improves with experience E. - **Tom Mitchell, 1997**
@@ -84,3 +90,5 @@ This is a categorization based on how the predictions are made.
 ## Main Challenges of ML
 - Insufficient quantity of training data
 - Non-representative training data (missing variations)
+- Missing data
+- Not knowing what feature is missing, until it is too late
