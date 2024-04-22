@@ -1,7 +1,7 @@
 # (ML)^2
 _**Me Learning Machine Learning**_
 
-I have been learning Data Science, Machine Learning, Deep Learning from many sources, especially from sources,
+I have been learning Data Science, Machine Learning, Deep Learning from many sources, especially from,
 - "Data Science from Scratch (Ed.2) by Joel Grus"
 - "Hands-on Machine Learning with Scikit-Learn, Keras, and Tensor Flow (Ed.3) by Aurélien Geron"
 - Machine Learning Specialization by Andrew Ng (I am a big fan), DeepLearning.ai
