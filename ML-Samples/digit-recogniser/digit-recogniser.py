@@ -36,10 +36,10 @@ sgd_classifier.fit(X_train, y_train_5)
 print(sgd_classifier.predict([test_digit]))
 
 from sklearn.model_selection import cross_val_score
-print(cross_val_score(sgd_classifier, X_train, y_train, cv=3, scoring='accuracy'))
+print(cross_val_score(sgd_classifier, X_train, y_train_5, cv=3, scoring='accuracy'))
 
 from sklearn.dummy import DummyClassifier
 dummy_classifier = DummyClassifier()
 dummy_classifier.fit(X_train, y_train_5)
 print(any(dummy_classifier.predict(X_train)))
-print(cross_val_score(dummy_classifier, X_train, y_train, cv=3, scoring='accuracy'))
+print(cross_val_score(dummy_classifier, X_train, y_train_5, cv=3, scoring='accuracy'))
