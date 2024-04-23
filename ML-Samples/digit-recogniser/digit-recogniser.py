@@ -43,3 +43,10 @@ dummy_classifier = DummyClassifier()
 dummy_classifier.fit(X_train, y_train_5)
 print(any(dummy_classifier.predict(X_train)))
 print(cross_val_score(dummy_classifier, X_train, y_train_5, cv=3, scoring='accuracy'))
+
+from sklearn.model_selection import cross_val_predict
+y_train_pred = cross_val_predict(sgd_classifier, X_train, y_train_5, cv=3)
+
+from sklearn.metrics import confusion_matrix
+cm = confusion_matrix(y_train_5, y_train_pred)
+print(cm)
